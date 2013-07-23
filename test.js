@@ -5,15 +5,15 @@ function parse(string){
 	}
 	result = removeSpace(result);
 	result = combineNumbers(result);
-	interpret(result);
+	segregate(result);
 }
-function interpret(array, index){
+function segregate(array, index){
 	var current = [];
 	if (index === undefined){ index = 0;};
 	for(i=index; i<array.length; i++){
 		if(array[i].match(/\(/)){
 			i++;
-			stuff = interpret(array, i);
+			stuff = segregate(array, i);
 			current.push(stuff[0]);
 			i = stuff[1];
 		}
@@ -24,8 +24,8 @@ function interpret(array, index){
 			current.push(array[i]);
 		}
 	}
-	console.log(result);
 	console.log(current);
+	removeQuotes(current);
 }
 function removeSpace(array){
 	return array.filter(function(x){return x != " ";});
@@ -39,13 +39,23 @@ function combineNumbers(array){
 	}
 	return array;
 }
+
 function removeQuotes(string){
-	for(i=0; i<string.length; i++){
-		if(string == "+"){
-			return string.charAt(i);
+	return JSON.parse(string);
+}
+
+function interpret(array){
+	for (i=0; i<array.length; i++){
+		console.log(array[i]);
+		if(array[i]==="+"){
+			console.log("wut");
 		}
 		else{
-			return JSON.parse(string);
+			removeQuotes(array[i]);
 		}
 	}
+	console.log(current);
+}
+function add(x, y){
+	return x+y;
 }
