@@ -1,3 +1,4 @@
+
 function parse(string){
 	result = [];
 	for (i=0; i<string.length; i++){
@@ -66,7 +67,7 @@ function interpret(array){
 		}
 	console.log(current);
 	current.reduce(add);
-	console.log(current.reduce(add));
+	document.getElementById('result').innerHTML = JSON.stringify(current.reduce(add));
 }
 
 function loopThrough(array){
