@@ -1,16 +1,21 @@
 function parse(string){
 	result = [];
 	for (i=0; i<string.length; i++){
+		if(string.charAt(i) )
 		result.push(string.charAt(i));
 	}
 	result = removeSpace(result);
 	result = combineNumbers(result);
-	segregate(result);
+	result = segregate(result);
+	result = loopThrough(result);
+	result = interpret(result);
+	document.getElementById('result').innerHTML = JSON.stringify(result);
 }
 
 function segregate(array, index){
 	var current = [];
 	index = (index === undefined) ? 0 : index;
+		console.log(array, index);
 	for(i=index; i<array.length; i++){
 		if(array[i].match(/\(/)){
 			i++;
@@ -25,44 +30,32 @@ function segregate(array, index){
 			current.push(array[i]);
 		}
 	}
-
-	loopThrough(current);
+	return current;
 }
 
-function doParen(array,index){
-	index = (index === undefined) ? 0 : index;
-	for (i=index; i<array.length; i++){
-		if(array[i] instanceof Array){
-			for(j=0;j<array[i].length;j++){
-				if(array[i][j]==="+"){
-					array[i] = add(array[i][j-1], array[i][j+1]);
-				}
+function interpret(elm){
+	if (typeof elm === 'number'){
+		return elm;
+	}
+	else{
+		for (i=0; i<elm.length; i++){
+			if(elm[i] === "+"){
+				elm.splice(i-1,3,add(interpret(elm[i-1]), interpret(elm[i+1])));
+				i--;
 			}
 		}
+		return elm[0];
 	}
-	interpret(array);
-}
-function interpret(array, index){
-	current = [];
-	index = (index === undefined) ? 0 : index;
-	for (i=index; i<array.length; i++){
-		if(array[i] != "+"){
-			current.push(array[i]);
-		}
-	}
-	document.getElementById('result').innerHTML = JSON.stringify(current.reduce(add));
 }
 
 function loopThrough(array){
-	for(i=0; i<array.length; i++){
+	for(var i=0; i<array.length; i++){
 		if (array[i] instanceof Array){
-			for (j=0; j<array[i].length; j++){
-				array[i][j] = objectify(array[i][j]);
-			}
+			array[i] = loopThrough(array[i]);
 		}
 		else{
 			array[i] = objectify(array[i]);
 		}
 	}
-	doParen(array);
+	return array;
 }

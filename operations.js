@@ -19,6 +19,9 @@ function add(x, y){
 	if(typeof x === 'number' && typeof y === 'number'){
 		return x+y;
 	}
+	// else{
+	// 	throw "Oh no";
+	// }
 };
 function addToArray(array,item){
 	if (item != undefined && item != "+"){
