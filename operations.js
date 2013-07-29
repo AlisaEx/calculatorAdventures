@@ -21,10 +21,36 @@ function add(x, y){
 	}
 };
 function addToArray(array,item){
-	if (item != undefined){
+	if (item != undefined && item != "+"){
 		array.push(item);
 	}
 };
 function removeSpace(array){
 	return array.filter(function(x){return x != " ";});
 };
+function objectify(elm){
+	if(elm != "+"){
+		return JSON.parse(elm);
+	}
+	else{
+		return elm;
+	}
+}
+
+var operations = [{
+	key: "+",
+	value: function(x,y){
+		return x + y;
+}},{
+	key: "-",
+	value: function(x,y){
+		return x - y;
+}},{
+	key: "/",
+	value: function(x,y){
+		return x/y;
+}},{
+	key: "*",
+	value: function(x,y){
+		return x*y;
+}}]
