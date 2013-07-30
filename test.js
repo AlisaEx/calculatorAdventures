@@ -8,14 +8,15 @@ function parse(string){
 	result = combineNumbers(result);
 	result = segregate(result);
 	result = loopThrough(result);
+	console.log(result);
 	result = interpret(result);
+	console.log(result);
 	document.getElementById('result').innerHTML = JSON.stringify(result);
 }
 
 function segregate(array, index){
 	var current = [];
 	index = (index === undefined) ? 0 : index;
-		console.log(array, index);
 	for(i=index; i<array.length; i++){
 		if(array[i].match(/\(/)){
 			i++;
@@ -39,13 +40,13 @@ function interpret(elm){
 	}
 	else{
 		for (i=0; i<elm.length; i++){
-			if(elm[i] === "+"){
-				elm.splice(i-1,3,add(interpret(elm[i-1]), interpret(elm[i+1])));
+			if(operations[elm[i]]!=undefined){
+				elm.splice(i-1,3,operations[elm[i]](interpret(elm[i-1]), interpret(elm[i+1])));
 				i--;
 			}
 		}
-		return elm[0];
 	}
+	return elm[0];
 }
 
 function loopThrough(array){
@@ -59,3 +60,5 @@ function loopThrough(array){
 	}
 	return array;
 }
+
+

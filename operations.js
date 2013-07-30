@@ -1,5 +1,5 @@
 function removeQuotes(string){
-	if(string === "+"){
+	if(string === operations[string]){
 		return string.charAt(0);
 	}
 	else{
@@ -15,16 +15,8 @@ function combineNumbers(array){
 	}
 	return array;
 };
-function add(x, y){
-	if(typeof x === 'number' && typeof y === 'number'){
-		return x+y;
-	}
-	// else{
-	// 	throw "Oh no";
-	// }
-};
 function addToArray(array,item){
-	if (item != undefined && item != "+"){
+	if (item != undefined && item != operations[item]){
 		array.push(item);
 	}
 };
@@ -32,28 +24,25 @@ function removeSpace(array){
 	return array.filter(function(x){return x != " ";});
 };
 function objectify(elm){
-	if(elm != "+"){
-		return JSON.parse(elm);
-	}
-	else{
+	if(operations[elm] !== undefined){
 		return elm;
 	}
+	else{
+  		return JSON.parse(elm);
+  	}
 }
 
-var operations = [{
-	key: "+",
-	value: function(x,y){
+var operations = {
+	"+": function(x,y){
 		return x + y;
-}},{
-	key: "-",
-	value: function(x,y){
+	},
+	"-": function(x,y){
 		return x - y;
-}},{
-	key: "/",
-	value: function(x,y){
+	},
+	"/": function(x,y){
 		return x/y;
-}},{
-	key: "*",
-	value: function(x,y){
+	},
+	"*": function(x,y){
 		return x*y;
-}}]
+	}
+}
