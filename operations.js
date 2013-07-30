@@ -31,7 +31,6 @@ function objectify(elm){
   		return JSON.parse(elm);
   	}
 }
-
 var operations = {
 	"+": function(x,y){
 		return x + y;
@@ -44,5 +43,15 @@ var operations = {
 	},
 	"*": function(x,y){
 		return x*y;
+	},
+	"^": function(x,y){
+		return Math.pow(x,y);
 	}
 }
+
+P - parentheses
+E - exponent
+M - multiplication
+D - division
+A - addition 
+S - subtraction

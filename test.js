@@ -8,9 +8,7 @@ function parse(string){
 	result = combineNumbers(result);
 	result = segregate(result);
 	result = loopThrough(result);
-	console.log(result);
 	result = interpret(result);
-	console.log(result);
 	document.getElementById('result').innerHTML = JSON.stringify(result);
 }
 
