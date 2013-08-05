@@ -1,11 +1,3 @@
-function removeQuotes(string){
-	if(string === operations[string]){
-		return string.charAt(0);
-	}
-	else{
-		return JSON.parse(string);
-	}
-};
 function combineNumbers(array){
 	for(i=0; i<array.length; i++){
 		while((array[i+1] != undefined) && array[i].match(/\d/) && array[i+1].match(/\d/)){
@@ -15,11 +7,6 @@ function combineNumbers(array){
 	}
 	return array;
 };
-function addToArray(array,item){
-	if (item != undefined && item != operations[item]){
-		array.push(item);
-	}
-};
 function removeSpace(array){
 	return array.filter(function(x){return x != " ";});
 };
@@ -28,30 +15,22 @@ function objectify(elm){
 		return elm;
 	}
 	else{
-  		return JSON.parse(elm);
+  		return parseInt(elm);
   	}
 }
-var operations = {
-	"+": function(x,y){
-		return x + y;
-	},
-	"-": function(x,y){
-		return x - y;
-	},
-	"/": function(x,y){
-		return x/y;
-	},
-	"*": function(x,y){
-		return x*y;
-	},
-	"^": function(x,y){
-		return Math.pow(x,y);
-	}
-}
-
-P - parentheses
-E - exponent
-M - multiplication
-D - division
-A - addition 
-S - subtraction
+var operations = [{
+	name: "^",
+	fn: function (x,y){return Math.pow(x,y);}
+},{
+	name: "*",
+	fn: function (x,y){return x*y;}
+},{
+	name: "/",
+	fn: function(x,y){return x/y;}
+},{
+	name: "+",
+	fn: function(x,y){return x + y;}
+},{
+	name: "-",
+	fn: function(x,y){return x - y;}
+}]
