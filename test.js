@@ -1,3 +1,13 @@
+// Simple JavaScript Calculator
+// made by: Alisa Ex
+
+
+
+// Takes a string value as input
+// && returns the result of that string
+
+
+
 function parse(string){
 	result = [];
 	for (i=0; i<string.length; i++){
@@ -14,7 +24,8 @@ function parse(string){
 	document.getElementById('result').innerHTML = JSON.stringify(result);
 }
 
-
+// RETURNS NEW ARRAY WITH NESTED ARRAYS INSTEAD OF PARENTHESIS
+// [1, +, (, 5, +, 3, )] >> [1, +, [5,+,3]]
 function segregate(array){
 	var current = [];
 	while(array.length !== 0){
@@ -34,23 +45,25 @@ function segregate(array){
 	return current;
 }
 
-function interpret(elm){
-	if (typeof elm === 'number'){
-		return elm;
-	}
-	else{
-		for (i=0; i<elm.length; i++){
-			if(operations[elm[i]]!=undefined){
-				elm.splice(i-1,3,operations[elm[i]](interpret(elm[i-1]), interpret(elm[i+1])));
-				i--;
-			}
-		}
-	}
-	return elm[0];
-}
+// function evalParenthesis(array){
+// 	for(i=0;i<array.length;i++){
+// 		if(array[i] instanceof Array){
+// 			evalParenthesis(array[i])
+// 		}
+// 	}
+// }
+
+// function slamacow(array){
+// 	var first = array[0];
+// 	var rest = array.slice(1,-1);
+// 	if(array.length === 0){return array;}
+// 	if(array.length === 3 && isNumber(array[0]) && isNumber(array[2])){
+// 		var answer = applyOperator()
+// 	}
+// }
 
 function orderOperation(array){
-	for (i=0 i< operations.length; i++){
+	for (var i=0 i< operations.length; i++){
 		array = applyOperator(array,operations[i]);
 	}
 }
@@ -69,24 +82,9 @@ function applyOperator(array, operator){
 	}
 }
 
-// function addOrder(elm, par){
-// 	var parenCount = par;
-// 	for (i=0; i<order[elm]-1; i++){
-// 		parenCount += par;
-// 	}
-// 	return parenCount;
-// }
 
-// function orderOps(array){
-// 	for (i=0; i<array.length;i++){
-// 		if(operations[array[i]]!=undefined){
-// 			array.splice(array[i-1],0,addOrder(array[i], "("));
-// 			array.splice(array[i+1],0,addOrder(array[i], ")"));
-// 		}
-// 	}
-// }
-
-
+// RETURNS ARRAY AFTER NUMBER PARSING
+// ["1","13","33"] >> [1,13,33]
 function loopThrough(array){
 	for(var i=0; i<array.length; i++){
 		if (array[i] instanceof Array){
