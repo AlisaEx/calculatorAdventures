@@ -23,6 +23,16 @@ function removeSpace(array){
 	return array.filter(function(x){return x != " ";});
 };
 
+// FINDS THE CORRECT OPERATION IN THE OPERATIONS DICTIONARY
+// plus = findOperation("+"); //*RETURNS {name:"+", fn: function(x,y){return x+y;}}*//
+var findOperation = function(operatorName) {
+  for (var i = 0; i < operations.length; i++) {
+    if (operations[i].name === operatorName) {
+      return operations[i];
+    }
+  }
+};
+
 
 // RETURNS THE PARSE OF A NUMBER, OR THE ELEMENT UNCHANGED(OPERATOR)
 // ["3"] >> [3]

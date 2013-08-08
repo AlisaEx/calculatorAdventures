@@ -1,11 +1,6 @@
 // Simple JavaScript Calculator
 // made by: Alisa Ex
 
-
-
-// Takes a string value as input
-// && returns the result of that string
-
 function parse(string){
 	result = [];
 	for (i=0; i<string.length; i++){
@@ -17,7 +12,7 @@ function parse(string){
 	result = segregate(result);
 	result = loopThrough(result);
 	result = orderOperation(result);
-	document.getElementById('result').innerHTML = JSON.stringify(result);
+	document.getElementById('result').innerHTML = JSON.stringify(result[0]);
 }
 
 // RETURNS NEW ARRAY WITH NESTED ARRAYS INSTEAD OF PARENTHESIS
@@ -41,45 +36,46 @@ function segregate(array){
 	return current;
 }
 
-// function evalParenthesis(array){
-// 	for(i=0;i<array.length;i++){
-// 		if(array[i] instanceof Array){
-// 			evalParenthesis(array[i])
-// 		}
-// 	}
-// }
-
-// function slamacow(array){
-// 	var first = array[0];
-// 	var rest = array.slice(1,-1);
-// 	if(array.length === 0){return array;}
-// 	if(array.length === 3 && isNumber(array[0]) && isNumber(array[2])){
-// 		var answer = applyOperator()
-// 	}
-// }
 
 function orderOperation(array){
 	for (name in operations){
-		array = applyOperator(array,operations[i]);
-	}
+		array = applyOperator(array,operations[name]);
+  	}
+  	return array;
 }
+
+
+
 function applyOperator(array, operator){
-	if(array.length === 0){
-		return array;}
-	if(array.length === 1){
-		return array[0];
-	}
-	if(array[1] === operator.name){
+	if(array.length === 0){return array;}
+	// if(array.length === 1){return array[0];}
+  	if (array[0] instanceof Array && array[0].length > 1) {
+    	var evaledArray = orderOperation(array[0]);
+    	// console.log(evaledArray)
+    	return applyOperator(evaledArray.concat(
+      	array.slice(1)), operator);
+  }
+  	else if(array[1] === operator.name){
 		var answer = operator.fn(array[0], array[2]);
-		var rest = array.slice(3,-1);
+		var rest = array.slice(3);
 		return applyOperator([answer].concat(rest),operator);
 	}
-	else{
+	else {
 		var start = array.slice(0,2);
-		var rest = array.slice(3,-1);
-		return start.concat(applyOperator(rest,operator));
+		var rest = array.slice(2);
+		return start.concat(applyOperator(rest, operator));
 	}
 }
+
+var plus = findOperation("+");
+// console.log("test1:", applyOperator([1, "+", 3, "+", 5], plus));
+// console.log("test2:", applyOperator([1, "+", 3, "-", 5, "+", 7], plus));
+// console.log("test3:", applyOperator([1, "+", 3, "-", 5, "*", 7, "+", 9], plus));
+// console.log("test4:", orderOperation([[1, "+", 3], "-", 5, "*", 7, "+", 9]));
+// console.log("test5:", orderOperation([[1, "+", 3, "-", 5], "*", 7, "+", 9]));
+console.log("test6:", orderOperation([[1, "*", [3, "-", 5]], "*", 7, "+", 9]));
+
+
 
 
 // RETURNS ARRAY AFTER NUMBER PARSING
@@ -95,5 +91,3 @@ function loopThrough(array){
 	}
 	return array;
 }
-
-
