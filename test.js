@@ -6,8 +6,6 @@
 // Takes a string value as input
 // && returns the result of that string
 
-
-
 function parse(string){
 	result = [];
 	for (i=0; i<string.length; i++){
@@ -16,11 +14,9 @@ function parse(string){
 	}
 	result = removeSpace(result);
 	result = combineNumbers(result);
-	console.log(result);
 	result = segregate(result);
-	console.log(result);
 	result = loopThrough(result);
-	result = interpret(result);
+	result = orderOperation(result);
 	document.getElementById('result').innerHTML = JSON.stringify(result);
 }
 
@@ -63,13 +59,16 @@ function segregate(array){
 // }
 
 function orderOperation(array){
-	for (var i=0 i< operations.length; i++){
+	for (name in operations){
 		array = applyOperator(array,operations[i]);
 	}
 }
 function applyOperator(array, operator){
-	if(array.length === 0){return array;}
-	if(array.length === 1){return array[0];}
+	if(array.length === 0){
+		return array;}
+	if(array.length === 1){
+		return array[0];
+	}
 	if(array[1] === operator.name){
 		var answer = operator.fn(array[0], array[2]);
 		var rest = array.slice(3,-1);

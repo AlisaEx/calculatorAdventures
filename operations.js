@@ -27,7 +27,7 @@ function removeSpace(array){
 // RETURNS THE PARSE OF A NUMBER, OR THE ELEMENT UNCHANGED(OPERATOR)
 // ["3"] >> [3]
 function objectify(elm){
-	if(operations[elm] !== undefined){
+	if(isNaN(elm)){
 		return elm;
 	}
 	else{
