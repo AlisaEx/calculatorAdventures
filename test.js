@@ -67,13 +67,14 @@ function applyOperator(array, operator){
 	}
 }
 
-var plus = findOperation("+");
-// console.log("test1:", applyOperator([1, "+", 3, "+", 5], plus));
-// console.log("test2:", applyOperator([1, "+", 3, "-", 5, "+", 7], plus));
-// console.log("test3:", applyOperator([1, "+", 3, "-", 5, "*", 7, "+", 9], plus));
-// console.log("test4:", orderOperation([[1, "+", 3], "-", 5, "*", 7, "+", 9]));
-// console.log("test5:", orderOperation([[1, "+", 3, "-", 5], "*", 7, "+", 9]));
-console.log("test6:", orderOperation([[1, "*", [3, "-", 5]], "*", 7, "+", 9]));
+// TESTS
+// var plus = findOperation("+");
+// // console.log("test1:", applyOperator([1, "+", 3, "+", 5], plus));
+// // console.log("test2:", applyOperator([1, "+", 3, "-", 5, "+", 7], plus));
+// // console.log("test3:", applyOperator([1, "+", 3, "-", 5, "*", 7, "+", 9], plus));
+// // console.log("test4:", orderOperation([[1, "+", 3], "-", 5, "*", 7, "+", 9]));
+// // console.log("test5:", orderOperation([[1, "+", 3, "-", 5], "*", 7, "+", 9]));
+// console.log("test6:", orderOperation([[1, "*", [3, "-", 5]], "*", 7, "+", 9]));
 
 
 
